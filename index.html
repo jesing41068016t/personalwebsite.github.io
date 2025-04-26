@@ -1,186 +1,457 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jhen Sing Chou - Personal Portfolio</title>
+  <title>Jhen Sing Chou | UX Designer</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- AOS 滾動動畫 -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Animate.css (更自然的動畫) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- Typed.js 打字機效果 -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- 粒子背景 -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- 自訂風格 -->
   <style>
-    
-    #typed { background: linear-gradient(to right, #fb923c, #ec4899, #8b5cf6); background-clip: text; -webkit-background-clip: text; color: transparent; }
-    #scroll-arrow { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 2rem; color: #fb923c; animation: bounce 2s infinite; cursor: pointer; }
-    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
-    .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .scroll-top { position: fixed; bottom: 30px; right: 30px; background: #fb923c; color: white; padding: 0.5rem; border-radius: 9999px; display: none; cursor: pointer; z-index: 50; }
-    .scroll-top.show { display: block; }
-    .glow { transition: 0.3s ease; }
-    .glow:hover { box-shadow: 0 0 20px #fb923c; }
-    .social-link:hover { transform: translateY(-4px) scale(1.1); color: #fb923c; transition: all 0.3s ease; }
-    #theme-toggle, #mute-toggle { cursor: pointer; position: fixed; background: #4b5563; color: white; border-radius: 50%; padding: 10px; z-index: 50; }
-    #theme-toggle { bottom: 100px; right: 30px; }
-    #mute-toggle { bottom: 160px; right: 30px; }
-    .portfolio-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; animation: scrollCarousel 20s linear infinite; padding-bottom: 2rem; }
-    .portfolio-item { scroll-snap-align: center; flex: 0 0 auto; width: 300px; background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; margin-right: 1rem; }
-    .portfolio-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-    .portfolio-img { width: 100%; height: 200px; object-fit: cover; }
-    .portfolio-text { padding: 1rem; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 100; }
-    .modal-content { background: white; padding: 2rem; border-radius: 1rem; max-width: 700px; max-height: 90vh; overflow-y: auto; animation: scaleIn 0.3s ease-out forwards; }
-    @keyframes scaleIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    @keyframes scrollCarousel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* 背景底色＋呼吸感 */
+    body {
+      background: linear-gradient(to bottom, #f3f4f6, #e5e7eb, #d1d5db);
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      color: #374151;
+    }
+
+    /* Header模糊固定效果 */
+    header {
+      backdrop-filter: blur(20px);
+      background-color: rgba(255, 255, 255, 0.4);
+      transition: background-color 0.4s, height 0.4s;
+    }
+    header.scrolled {
+      background-color: rgba(243, 244, 246, 0.9);
+      height: 60px;
+    }
+
+    /* ScrollTop按鈕 */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #d1d5db;
+      color: #fb923c;
+      padding: 0.7rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      z-index: 50;
+      display: none;
+      transition: all 0.4s ease;
+    }
+    #scrollTopBtn:hover {
+      background: #fb923c;
+      color: white;
+    }
+
+    /* 粒子背景區域 */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
   </style>
+
 </head>
-<body class="relative bg-gradient-to-b from-orange-50 to-white dark:from-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 font-sans overflow-x-hidden">
-</div>
-<audio id="bg-music" loop><source src="https://cdn.pixabay.com/audio/2022/08/04/audio_9ef062c4d0.mp3" type="audio/mpeg"></audio>
-<div id="particles-js" class="absolute inset-0 z-0"></div>
-<div class="relative z-10 max-w-5xl mx-auto p-6">
 
-<section class="text-center mb-20 relative">
-  <img src="https://images.unsplash.com/photo-1502767089025-6572583495b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile Photo" class="w-32 h-32 mx-auto rounded-full ring-4 ring-orange-300/50 mb-6 object-cover">
-  <h1 class="text-5xl sm:text-7xl font-extrabold animate__animated animate__fadeInDown"><span id="typed"></span></h1>
-  <p class="mt-6 text-lg text-gray-600 dark:text-gray-300 animate__animated animate__fadeInUp">Human-centered experiences for a connected world</p>
-  <a href="#portfolio" class="inline-block mt-8 px-6 py-3 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition animate__animated animate__fadeInUp">View My Work</a>
-  <div id="scroll-arrow">↓</div>
-</section>
+<body class="relative overflow-x-hidden">
 
-<header class="text-center mb-16 animate__animated animate__fadeInDown">
-  <img class="w-32 h-32 rounded-full mx-auto ring-4 ring-orange-300/40 hover:scale-110 glow transition-transform duration-700 ease-in-out animate-bounce object-cover" src="/mnt/data/個人照.png" alt="Profile Picture">
-  <h1 class="text-4xl font-extrabold tracking-tight mt-6 animate-pulse">Jhen Sing Chou</h1>
-  <div class="flex justify-center space-x-6 mt-4">
-    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-linkedin"></i></a>
-    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-github"></i></a>
-  </div>
+<!-- 粒子背景 -->
+<div id="particles-js"></div>
+<!-- 固定Header -->
+<header id="main-header" class="fixed w-full top-0 left-0 flex items-center justify-between px-8 py-4 z-50">
+  <div class="text-2xl font-bold text-orange-500">Jhen Sing Chou</div>
+  <nav class="hidden md:flex space-x-8 text-lg font-medium">
+    <a href="#about" class="hover:text-orange-400 transition">About</a>
+    <a href="#skills" class="hover:text-orange-400 transition">Skills</a>
+    <a href="#portfolio" class="hover:text-orange-400 transition">Portfolio</a>
+    <a href="#contact" class="hover:text-orange-400 transition">Contact</a>
+  </nav>
 </header>
 
-<section id="portfolio" class="reveal">
-  <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-3xl shadow-2xl hover:shadow-3xl p-8 mb-14">
-    <h2 class="text-3xl font-extrabold mb-8">Portfolio</h2>
-    <div class="portfolio-carousel">
-      <div class="portfolio-item cursor-pointer overflow-hidden rounded-2xl animate__animated animate__fadeInUp" onclick="openModal(0)">
-        <img src="/mnt/data/1-1.png" alt="Social Hive" class="portfolio-img">
-        <div class="portfolio-text">
-          <h3 class="text-xl font-bold">Social Hive</h3>
-          <p class="text-gray-600 dark:text-gray-400">Click to view more</p>
-        </div>
-      </div>
-      <div class="portfolio-item cursor-pointer overflow-hidden rounded-2xl animate__animated animate__fadeInUp" onclick="openModal(1)">
-        <img src="/mnt/data/商務計劃.png" alt="Reimagining Tinder" class="portfolio-img">
-        <div class="portfolio-text">
-          <h3 class="text-xl font-bold">Reimagining Tinder</h3>
-          <p class="text-gray-600 dark:text-gray-400">Click to view more</p>
-        </div>
-      </div>
-    </div>
+<!-- Hero 首屏 -->
+<section id="hero" class="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24">
+
+  <!-- 頭像 -->
+  <img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=400" 
+       alt="Profile Photo" 
+       class="w-32 h-32 rounded-full ring-4 ring-gray-300 mb-8 object-cover hover:scale-110 transition-transform duration-700">
+
+  <!-- 打字機標題 -->
+  <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 leading-tight animate__animated animate__fadeIn">
+    <span id="typed" class="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500"></span>
+  </h1>
+
+  <!-- 副標文字 -->
+  <p class="text-lg text-gray-600 max-w-2xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">
+    Human-centered experiences that connect people, technology, and emotion.
+  </p>
+
+  <!-- 下滑提示 -->
+  <div id="scroll-arrow" class="mt-12 text-4xl text-orange-400 animate-bounce">&#8595;</div>
+
+</section>
+<!-- About Section -->
+<section id="about" class="relative z-10 bg-gray-100 pt-32 pb-32" data-aos="fade-up">
+
+  <div class="max-w-4xl mx-auto text-center px-6">
+
+    <!-- About 標題 -->
+    <h2 class="text-4xl font-bold mb-10 relative inline-block">
+      <span class="relative z-10">About Me</span>
+      <span class="absolute -inset-1 bg-orange-100 rounded-full blur-2xl opacity-60"></span>
+    </h2>
+
+    <!-- About 內容 -->
+    <p class="text-lg text-gray-600 leading-relaxed mb-6 animate__animated animate__fadeInUp">
+      I'm a UX designer passionate about crafting human-centered experiences that feel intuitive, emotional, and beautiful.
+    </p>
+
+    <p class="text-lg text-gray-600 leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
+      With a background in visual communication and a deep curiosity about human behavior, I design products that bridge technology and empathy — solving real problems while inspiring deeper connection.
+    </p>
+
   </div>
+
+</section>
+<!-- Skills Section -->
+<section id="skills" class="relative z-10 bg-gray-200 pt-32 pb-32" data-aos="fade-up">
+
+  <div class="max-w-6xl mx-auto px-6 text-center">
+
+    <!-- Skills 標題 -->
+    <h2 class="text-4xl font-bold mb-12 relative inline-block">
+      <span class="relative z-10">Skills</span>
+      <span class="absolute -inset-1 bg-orange-100 rounded-full blur-2xl opacity-60"></span>
+    </h2>
+
+    <!-- Skills 卡片 -->
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- Skill 1 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-right">
+        <i class="fas fa-paint-brush text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">Visual Design</h4>
+        <p class="text-gray-600 text-sm">Crafting beautiful and effective visual experiences.</p>
+      </div>
+
+      <!-- Skill 2 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-left">
+        <i class="fas fa-mobile-alt text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">Responsive Design</h4>
+        <p class="text-gray-600 text-sm">Designing interfaces that adapt fluidly across devices.</p>
+      </div>
+
+      <!-- Skill 3 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-right">
+        <i class="fas fa-users text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">User Research</h4>
+        <p class="text-gray-600 text-sm">Understanding real user needs through research and empathy.</p>
+      </div>
+
+      <!-- Skill 4 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-left">
+        <i class="fas fa-code text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">Front-End Dev</h4>
+        <p class="text-gray-600 text-sm">Building responsive interactive experiences with clean code.</p>
+      </div>
+
+      <!-- Skill 5 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-right">
+        <i class="fas fa-project-diagram text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">Service Design</h4>
+        <p class="text-gray-600 text-sm">Connecting products and people through holistic systems.</p>
+      </div>
+
+      <!-- Skill 6 -->
+      <div class="bg-white/70 rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition transform duration-500"
+           data-aos="fade-left">
+        <i class="fas fa-lightbulb text-4xl text-orange-400 mb-4"></i>
+        <h4 class="text-xl font-bold mb-2">Creative Strategy</h4>
+        <p class="text-gray-600 text-sm">Merging creativity and business thinking to drive design impact.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- Portfolio Section -->
+<section id="portfolio" class="relative z-10 bg-gray-100 pt-32 pb-32" data-aos="fade-up">
+
+  <div class="max-w-6xl mx-auto px-6 text-center">
+
+    <!-- Portfolio 標題 -->
+    <h2 class="text-4xl font-bold mb-12 relative inline-block">
+      <span class="relative z-10">Portfolio</span>
+      <span class="absolute -inset-1 bg-orange-100 rounded-full blur-2xl opacity-60"></span>
+    </h2>
+
+    <!-- 作品卡片區 -->
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- Project 1 -->
+      <div onclick="openModal(0)" class="relative group cursor-pointer overflow-hidden rounded-3xl bg-white/80 p-4 shadow-lg hover:shadow-2xl hover:scale-105 transition">
+        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:brightness-110 transition" alt="Tinder Project">
+        <h3 class="text-xl font-bold mb-1">Redesigning Tinder</h3>
+        <p class="text-sm text-gray-600">Intuitive conversation experiences for deeper connections.</p>
+      </div>
+
+      <!-- Project 2 -->
+      <div onclick="openModal(1)" class="relative group cursor-pointer overflow-hidden rounded-3xl bg-white/80 p-4 shadow-lg hover:shadow-2xl hover:scale-105 transition">
+        <img src="https://images.pexels.com/photos/6476253/pexels-photo-6476253.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:brightness-110 transition" alt="Social Hive">
+        <h3 class="text-xl font-bold mb-1">Social Hive Project</h3>
+        <p class="text-sm text-gray-600">Connecting communities through acts of kindness.</p>
+      </div>
+
+      <!-- Project 3 -->
+      <div onclick="openModal(2)" class="relative group cursor-pointer overflow-hidden rounded-3xl bg-white/80 p-4 shadow-lg hover:shadow-2xl hover:scale-105 transition">
+        <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:brightness-110 transition" alt="Flexfit Gym">
+        <h3 class="text-xl font-bold mb-1">Flexfit Inclusive Gym</h3>
+        <p class="text-sm text-gray-600">Making fitness more accessible for everyone.</p>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <div id="modal-gallery" class="flex overflow-x-auto space-x-4 mb-6"></div>
-    <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
-    <p id="modal-desc" class="text-gray-600"></p>
-    <div class="flex justify-between mt-6">
-      <button onclick="prevProject()" class="px-4 py-2 bg-gray-300 text-black rounded-full">Prev</button>
-      <button onclick="nextProject()" class="px-4 py-2 bg-orange-500 text-white rounded-full">Next</button>
+<!-- Modal 彈窗區 -->
+<div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+  <div class="bg-white p-8 rounded-2xl max-w-2xl w-full relative overflow-hidden">
+
+    <!-- 關閉按鈕 -->
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-2xl">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <!-- Modal圖片 -->
+    <img id="modal-img" class="w-full h-64 object-cover rounded-xl mb-6 animate__animated animate__fadeInDown" alt="Project Detail">
+
+    <!-- Modal標題 -->
+    <h3 id="modal-title" class="text-2xl font-bold mb-4 animate__animated animate__fadeInRight"></h3>
+
+    <!-- Modal介紹 -->
+    <div class="space-y-4 animate__animated animate__fadeInUp">
+      <p id="modal-description" class="text-gray-600"></p>
     </div>
-    <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-full w-full">Close</button>
+
+    <!-- 上一個/下一個按鈕 -->
+    <div class="flex justify-between mt-6">
+      <button onclick="prevProject()" class="px-4 py-2 bg-gray-300 text-black rounded-full hover:bg-gray-400">Prev</button>
+      <button onclick="nextProject()" class="px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">Next</button>
+    </div>
+
   </div>
 </div>
+<!-- Contact Section -->
+<section id="contact" class="relative z-10 bg-gray-50 pt-32 pb-32 text-center" data-aos="fade-up">
 
+  <div class="max-w-3xl mx-auto px-6">
+
+    <!-- Contact 標題 -->
+    <h2 class="text-4xl font-bold mb-12 relative inline-block">
+      <span class="relative z-10">Let's Connect</span>
+      <span class="absolute -inset-1 bg-orange-100 rounded-full blur-2xl opacity-60"></span>
+    </h2>
+
+    <!-- 說明文字 -->
+    <p class="text-lg text-gray-600 leading-relaxed mb-8">
+      I'm excited to collaborate or just chat about ideas. <br> Feel free to reach out anytime!
+    </p>
+
+    <!-- Email按鈕 -->
+    <a href="mailto:your.email@example.com"
+       class="inline-block mt-6 px-8 py-4 bg-orange-500 text-white font-bold rounded-full hover:shadow-lg hover:scale-105 transition transform duration-300 ease-in-out">
+      Email Me
+    </a>
+
+    <!-- 社群Icon -->
+    <div class="flex justify-center space-x-8 mt-10 text-3xl">
+      <a href="https://instagram.com" target="_blank" class="icon-hover transform transition-transform duration-500 hover:rotate-6 hover:scale-110 text-gray-400">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="icon-hover transform transition-transform duration-500 hover:rotate-6 hover:scale-110 text-gray-400">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com" target="_blank" class="icon-hover transform transition-transform duration-500 hover:rotate-6 hover:scale-110 text-gray-400">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-gray-400 text-sm mt-24 pb-10">
+  <hr class="mb-8 border-gray-300 w-2/3 mx-auto">
+  <p class="mb-4 font-medium text-lg text-gray-700">
+    Building meaningful experiences with design, empathy, and creativity.
+  </p>
+  <p>© 2025 Jhen Sing Chou. All rights reserved.</p>
+</footer>
+
+<!-- Scroll to Top Button -->
+<div id="scrollTopBtn" onclick="scrollToTop()"
+     class="fixed bottom-8 right-8 bg-gray-300 text-orange-500 w-12 h-12 rounded-full flex justify-center items-center text-2xl cursor-pointer hidden hover:bg-orange-500 hover:text-white z-50">
+  ↑
 </div>
+<!-- Script 區 -->
 
-<div id="scrollTopBtn" class="scroll-top">↑</div>
-<div id="theme-toggle" title="Toggle Theme"><i class="fas fa-adjust"></i></div>
-<div id="mute-toggle" title="Toggle Music"><i class="fas fa-volume-up"></i></div>
-
+<!-- AOS初始化 -->
 <script>
-particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+  AOS.init({
+    once: true,
+    duration: 1200,
+    easing: 'ease-in-out',
+  });
+</script>
 
-new Typed('#typed', { strings: ["Designing a Better Tomorrow", "Creating Meaningful Connections"], typeSpeed: 50, backSpeed: 30, loop: true });
+<!-- 粒子背景設定 -->
+<script>
+particlesJS('particles-js', {
+  "particles": {
+    "number": { "value": 40, "density": { "enable": true, "value_area": 1000 }},
+    "color": { "value": "#d1d5db" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5, "random": true },
+    "size": { "value": 6, "random": true },
+    "line_linked": { "enable": true, "distance": 200, "color": "#d1d5db", "opacity": 0.3, "width": 1 },
+    "move": {
+      "enable": true,
+      "speed": 0.4,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "attract": { "enable": true, "rotateX": 600, "rotateY": 1200 }
+    }
+  },
+  "interactivity": {
+    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false } },
+    "modes": {
+      "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }
+    }
+  },
+  "retina_detect": true
+});
+</script>
 
+<!-- 打字機效果 -->
+<script>
+new Typed('#typed', {
+  strings: ['Jhen Sing Chou', 'UX Designer'],
+  typeSpeed: 70,
+  backSpeed: 40,
+  startDelay: 300,
+  backDelay: 1500,
+  loop: false
+});
+</script>
+
+<!-- Modal控制 -->
+<script>
 const projects = [
-  { title: "Social Hive", desc: "A playful community engagement platform combining mutual aid missions and social connection tracking.", imgs: ["/mnt/data/1-1.png"] },
-  { title: "Reimagining Tinder", desc: "Redesigning the conversation experience on Tinder to foster deeper, meaningful ice-breaking and social exploration.", imgs: ["/mnt/data/商務計劃.png"] }
+  {
+    title: 'Redesigning Tinder',
+    img: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800',
+    description: 'Enhancing first connections through smart conversation designs, reducing ghosting and encouraging deeper engagements.',
+  },
+  {
+    title: 'Social Hive Project',
+    img: 'https://images.pexels.com/photos/6476253/pexels-photo-6476253.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800',
+    description: 'Building real community bonds through acts of kindness, mission-driven social engagement platform.',
+  },
+  {
+    title: 'Flexfit Inclusive Gym',
+    img: 'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=800',
+    description: 'Adaptive fitness experiences for all users, making wellness inclusive, accessible, and customizable.',
+  }
 ];
+
 let currentProject = 0;
-let isMuted = false;
 
 function openModal(index) {
   currentProject = index;
-  const gallery = document.getElementById('modal-gallery');
-  gallery.innerHTML = '';
-  projects[index].imgs.forEach(imgSrc => {
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    img.className = 'w-full rounded-xl';
-    gallery.appendChild(img);
-  });
-  document.getElementById('modal-title').innerText = projects[index].title;
-  document.getElementById('modal-desc').innerText = projects[index].desc;
-  document.getElementById('modal').style.display = 'flex';
+  updateModal();
+  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('modal').classList.add('flex');
+}
+
+function updateModal() {
+  const project = projects[currentProject];
+  document.getElementById('modal-img').src = project.img;
+  document.getElementById('modal-title').innerText = project.title;
+  document.getElementById('modal-description').innerText = project.description;
 }
 
 function closeModal() {
-  document.getElementById('modal').style.display = 'none';
+  document.getElementById('modal').classList.add('hidden');
+  document.getElementById('modal').classList.remove('flex');
 }
 
 function nextProject() {
   currentProject = (currentProject + 1) % projects.length;
-  openModal(currentProject);
+  updateModal();
 }
 
 function prevProject() {
   currentProject = (currentProject - 1 + projects.length) % projects.length;
-  openModal(currentProject);
+  updateModal();
 }
-
-window.addEventListener('scroll', () => {
-  const reveals = document.querySelectorAll('.reveal');
-  reveals.forEach(reveal => {
-    if (reveal.getBoundingClientRect().top < window.innerHeight - 50) {
-      reveal.classList.add('active');
-    }
-  });
-
-  const scrollTopBtn = document.getElementById('scrollTopBtn');
-  if (window.scrollY > 300) scrollTopBtn.classList.add('show');
-  else scrollTopBtn.classList.remove('show');
-});
-
-const scrollTopBtn = document.getElementById('scrollTopBtn');
-scrollTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-  document.documentElement.classList.toggle('dark');
-  localStorage.setItem('color-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-});
-
-const muteToggle = document.getElementById('mute-toggle');
-const music = document.getElementById('bg-music');
-window.addEventListener('scroll', () => {
-  if (!isMuted && music.paused) music.play();
-});
-muteToggle.addEventListener('click', () => {
-  isMuted = !isMuted;
-  if (isMuted) {
-    music.pause();
-    muteToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-  } else {
-    music.play();
-    muteToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-  }
-});
 </script>
 
-</body>
-</html>
+<!-- ScrollTop按鈕 -->
+<script>
+window.addEventListener('scroll', () => {
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 300) {
+    scrollTopBtn.classList.remove('hidden');
+  } else {
+    scrollTopBtn.classList.add('hidden');
+  }
+
+  const header = document.getElementById('main-header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
