@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jhen Sing Chou - Personal Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    
+    #typed { background: linear-gradient(to right, #fb923c, #ec4899, #8b5cf6); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    #scroll-arrow { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 2rem; color: #fb923c; animation: bounce 2s infinite; cursor: pointer; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+    .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .scroll-top { position: fixed; bottom: 30px; right: 30px; background: #fb923c; color: white; padding: 0.5rem; border-radius: 9999px; display: none; cursor: pointer; z-index: 50; }
+    .scroll-top.show { display: block; }
+    .glow { transition: 0.3s ease; }
+    .glow:hover { box-shadow: 0 0 20px #fb923c; }
+    .social-link:hover { transform: translateY(-4px) scale(1.1); color: #fb923c; transition: all 0.3s ease; }
+    #theme-toggle, #mute-toggle { cursor: pointer; position: fixed; background: #4b5563; color: white; border-radius: 50%; padding: 10px; z-index: 50; }
+    #theme-toggle { bottom: 100px; right: 30px; }
+    #mute-toggle { bottom: 160px; right: 30px; }
+    .portfolio-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; animation: scrollCarousel 20s linear infinite; padding-bottom: 2rem; }
+    .portfolio-item { scroll-snap-align: center; flex: 0 0 auto; width: 300px; background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; margin-right: 1rem; }
+    .portfolio-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .portfolio-img { width: 100%; height: 200px; object-fit: cover; }
+    .portfolio-text { padding: 1rem; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 100; }
+    .modal-content { background: white; padding: 2rem; border-radius: 1rem; max-width: 700px; max-height: 90vh; overflow-y: auto; animation: scaleIn 0.3s ease-out forwards; }
+    @keyframes scaleIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes scrollCarousel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  </style>
+</head>
+<body class="relative bg-gradient-to-b from-orange-50 to-white dark:from-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 font-sans overflow-x-hidden">
+</div>
+<audio id="bg-music" loop><source src="https://cdn.pixabay.com/audio/2022/08/04/audio_9ef062c4d0.mp3" type="audio/mpeg"></audio>
+<div id="particles-js" class="absolute inset-0 z-0"></div>
+<div class="relative z-10 max-w-5xl mx-auto p-6">
+
+<section class="text-center mb-20 relative">
+  <img src="https://images.unsplash.com/photo-1502767089025-6572583495b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile Photo" class="w-32 h-32 mx-auto rounded-full ring-4 ring-orange-300/50 mb-6 object-cover">
+  <h1 class="text-5xl sm:text-7xl font-extrabold animate__animated animate__fadeInDown"><span id="typed"></span></h1>
+  <p class="mt-6 text-lg text-gray-600 dark:text-gray-300 animate__animated animate__fadeInUp">Human-centered experiences for a connected world</p>
+  <a href="#portfolio" class="inline-block mt-8 px-6 py-3 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition animate__animated animate__fadeInUp">View My Work</a>
+  <div id="scroll-arrow">↓</div>
+</section>
+
+<header class="text-center mb-16 animate__animated animate__fadeInDown">
+  <img class="w-32 h-32 rounded-full mx-auto ring-4 ring-orange-300/40 hover:scale-110 glow transition-transform duration-700 ease-in-out animate-bounce object-cover" src="/mnt/data/個人照.png" alt="Profile Picture">
+  <h1 class="text-4xl font-extrabold tracking-tight mt-6 animate-pulse">Jhen Sing Chou</h1>
+  <div class="flex justify-center space-x-6 mt-4">
+    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-linkedin"></i></a>
+    <a href="#" class="text-gray-400 text-xl social-link"><i class="fab fa-github"></i></a>
+  </div>
+</header>
+
+<section id="portfolio" class="reveal">
+  <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-3xl shadow-2xl hover:shadow-3xl p-8 mb-14">
+    <h2 class="text-3xl font-extrabold mb-8">Portfolio</h2>
+    <div class="portfolio-carousel">
+      <div class="portfolio-item cursor-pointer overflow-hidden rounded-2xl animate__animated animate__fadeInUp" onclick="openModal(0)">
+        <img src="/mnt/data/1-1.png" alt="Social Hive" class="portfolio-img">
+        <div class="portfolio-text">
+          <h3 class="text-xl font-bold">Social Hive</h3>
+          <p class="text-gray-600 dark:text-gray-400">Click to view more</p>
+        </div>
+      </div>
+      <div class="portfolio-item cursor-pointer overflow-hidden rounded-2xl animate__animated animate__fadeInUp" onclick="openModal(1)">
+        <img src="/mnt/data/商務計劃.png" alt="Reimagining Tinder" class="portfolio-img">
+        <div class="portfolio-text">
+          <h3 class="text-xl font-bold">Reimagining Tinder</h3>
+          <p class="text-gray-600 dark:text-gray-400">Click to view more</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div id="modal-gallery" class="flex overflow-x-auto space-x-4 mb-6"></div>
+    <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+    <p id="modal-desc" class="text-gray-600"></p>
+    <div class="flex justify-between mt-6">
+      <button onclick="prevProject()" class="px-4 py-2 bg-gray-300 text-black rounded-full">Prev</button>
+      <button onclick="nextProject()" class="px-4 py-2 bg-orange-500 text-white rounded-full">Next</button>
+    </div>
+    <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-full w-full">Close</button>
+  </div>
+</div>
+
+</div>
+
+<div id="scrollTopBtn" class="scroll-top">↑</div>
+<div id="theme-toggle" title="Toggle Theme"><i class="fas fa-adjust"></i></div>
+<div id="mute-toggle" title="Toggle Music"><i class="fas fa-volume-up"></i></div>
+
+<script>
+particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+
+new Typed('#typed', { strings: ["Designing a Better Tomorrow", "Creating Meaningful Connections"], typeSpeed: 50, backSpeed: 30, loop: true });
+
+const projects = [
+  { title: "Social Hive", desc: "A playful community engagement platform combining mutual aid missions and social connection tracking.", imgs: ["/mnt/data/1-1.png"] },
+  { title: "Reimagining Tinder", desc: "Redesigning the conversation experience on Tinder to foster deeper, meaningful ice-breaking and social exploration.", imgs: ["/mnt/data/商務計劃.png"] }
+];
+let currentProject = 0;
+let isMuted = false;
+
+function openModal(index) {
+  currentProject = index;
+  const gallery = document.getElementById('modal-gallery');
+  gallery.innerHTML = '';
+  projects[index].imgs.forEach(imgSrc => {
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.className = 'w-full rounded-xl';
+    gallery.appendChild(img);
+  });
+  document.getElementById('modal-title').innerText = projects[index].title;
+  document.getElementById('modal-desc').innerText = projects[index].desc;
+  document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+function nextProject() {
+  currentProject = (currentProject + 1) % projects.length;
+  openModal(currentProject);
+}
+
+function prevProject() {
+  currentProject = (currentProject - 1 + projects.length) % projects.length;
+  openModal(currentProject);
+}
+
+window.addEventListener('scroll', () => {
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(reveal => {
+    if (reveal.getBoundingClientRect().top < window.innerHeight - 50) {
+      reveal.classList.add('active');
+    }
+  });
+
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 300) scrollTopBtn.classList.add('show');
+  else scrollTopBtn.classList.remove('show');
+});
+
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('color-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+});
+
+const muteToggle = document.getElementById('mute-toggle');
+const music = document.getElementById('bg-music');
+window.addEventListener('scroll', () => {
+  if (!isMuted && music.paused) music.play();
+});
+muteToggle.addEventListener('click', () => {
+  isMuted = !isMuted;
+  if (isMuted) {
+    music.pause();
+    muteToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  } else {
+    music.play();
+    muteToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+  }
+});
+</script>
+
+</body>
+</html>
